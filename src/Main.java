@@ -4,10 +4,9 @@ public class Main {
         Pilot pilot = new Pilot();
         pilot.rollDice();
         copilot.rollDice();
-        pilot.setRadio(4);
-        pilot.setRadio(3);
-        copilot.setRadio(4);
-        copilot.setRadio(3);
-        copilot.setRadio(2);
+        pilot.setCoffee(2);
+        pilot.setCoffee(1);
+        pilot.getCoffee(5,2);
+        pilot.getDiceRolls();
     }
 }
