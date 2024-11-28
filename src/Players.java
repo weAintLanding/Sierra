@@ -70,7 +70,7 @@ class Players {
         }
     }
 
-    public void getCoffee (int diceValue, int coffeeValue){
+    public void useCoffee (int diceValue, int coffeeValue){
         int coffeeNeeded = Math.abs(coffeeValue);
         if (coffeeValue != 0 && coffee >= coffeeNeeded && diceRolls.contains(diceValue)){
             int index = diceRolls.indexOf(diceValue);

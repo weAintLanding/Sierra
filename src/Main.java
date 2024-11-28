@@ -6,7 +6,7 @@ public class Main {
         copilot.rollDice();
         pilot.setCoffee(2);
         pilot.setCoffee(1);
-        pilot.getCoffee(5,2);
+        pilot.useCoffee(5,1);
         pilot.getDiceRolls();
     }
 }
