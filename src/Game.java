@@ -76,13 +76,5 @@ class ApproachTrack {
         }
     }
 
-    private boolean checkLandingConditions() {
 
-        if (airplane.getAxis().getAxisValue() != 0) {
-            System.out.println("Landing failed: Axis is not balanced.");
-            return false;
-        }
-
-        }
-    }
 }
