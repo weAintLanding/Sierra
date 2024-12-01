@@ -144,9 +144,15 @@ class Airplane{
     public LandingGear getLandingGear() {
         return landingGear;
     }
-    public Flaps getFlaps() { return flaps;}
-    public Radio getRadio() {return radio;}
-    public Concentration getConcentration() {return concentration;}
+    public Flaps getFlaps(){
+        return flaps;
+    }
+    public Radio getRadio(){
+        return radio;
+    }
+    public Concentration getConcentration() {
+        return concentration;
+    }
 
     //Getter and Setter for ApproachPosition
     public int getApproachPosition(){
