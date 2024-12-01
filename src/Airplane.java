@@ -65,6 +65,7 @@ class Brakes{
     private final Airplane airplane;
 
     private boolean[] brakeFields = {false,false,false};
+    private int activatedBrakeFields = 0;
 
     public Brakes(Airplane airplane) {
         this.airplane = airplane;
@@ -74,16 +75,22 @@ class Brakes{
     public int getRedBrakeMarker() {
         return redBrakeMarker;
     }
-    public void setRedBrakeMarker(int redBrakeMarker) {
-        this.redBrakeMarker = redBrakeMarker;
-    }
 
     //Brake fields
     public boolean getBrakeFields(int index) {
         return brakeFields[index];
     }
     public void setBrakeFieldsTrue(int index) {
-        brakeFields[index] = true;
+        if(index>=0 && index<brakeFields.length && !brakeFields[index]){
+            brakeFields[index] = true;
+            activatedBrakeFields++;
+
+            if(activatedBrakeFields == 1){
+                redBrakeMarker++;
+            }else if(activatedBrakeFields <= 3){
+                redBrakeMarker += 2;
+            }
+        }
 
     }
 }
