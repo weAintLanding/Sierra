@@ -23,5 +23,7 @@ public class Main {
         copilot.getRadio();
         pilot.setRadio(1);
         pilot.setRadio(5);
+
+
     }
 }
