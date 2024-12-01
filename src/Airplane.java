@@ -1,28 +1,10 @@
-import java.util.ArrayList;
-import java.util.Random;
-
-class LandingGear{
-
-}
-
-class Brakes{
-    private int redBrakeMarker = 2;
-
-    //Getter and Setter for brakeMarker
-    public int getRedBrakeMarker() {
-        return redBrakeMarker;
-    }
-    public void setRedBrakeMarker(int redBrakeMarker) {
-        this.redBrakeMarker = redBrakeMarker;
-    }
-}
-
-class Flaps{
-
-}
-
 class Axis{
+    private final Airplane airplane;
     private int axisValue = 0;
+
+    public Axis(Airplane airplane){
+        this.airplane = airplane;
+    }
 
     private void changeAxis(int pilotValue, int copilotValue){
         int changeValue = copilotValue - pilotValue;
@@ -32,14 +14,10 @@ class Axis{
             System.out.println("Plane has crashed.");
         }
     }
-}
 
-class Radio{
-
-}
-
-class Concentration{
-
+    public int getAxisValue() {
+        return axisValue;
+    }
 }
 
 class Engine{
@@ -82,26 +60,93 @@ class Engine{
     }
 }
 
+class Brakes{
+    private int redBrakeMarker = 2;
+    private final Airplane airplane;
+
+    public Brakes(Airplane airplane) {
+        this.airplane = airplane;
+    }
+
+    //Getter and Setter for brakeMarker
+    public int getRedBrakeMarker() {
+        return redBrakeMarker;
+    }
+    public void setRedBrakeMarker(int redBrakeMarker) {
+        this.redBrakeMarker = redBrakeMarker;
+    }
+}
+
+class LandingGear{
+    private final Airplane airplane;
+
+    public LandingGear(Airplane airplane) {
+        this.airplane = airplane;
+    }
+}
+
+class Flaps{
+    private final Airplane airplane;
+
+    public Flaps(Airplane airplane) {
+        this.airplane = airplane;
+    }
+}
+
+class Radio{
+    private final Airplane airplane;
+
+    public Radio(Airplane airplane) {
+        this.airplane = airplane;
+    }
+}
+
+class Concentration{
+    private final Airplane airplane;
+
+    public Concentration(Airplane airplane) {
+        this.airplane = airplane;
+    }
+}
+
+
 class Airplane{
-    private int Altitue = 0;
+    private int altitude = 0;
     private int approachPosition = 0;
 
-    private LandingGear landingGear = new LandingGear();
-    private Brakes brakes = new Brakes();
-    private Flaps flaps = new Flaps();
-    private Axis axis = new Axis();
-    private Radio radio = new Radio();
-    private Concentration concentration = new Concentration();
+    private Axis axis;
     private Engine engine;
-
+    private Brakes brakes;
+    private LandingGear landingGear;
+    private Flaps flaps;
+    private Radio radio;
+    private Concentration concentration;
 
     public Airplane(){
         engine = new Engine(this);
+        axis = new Axis(this);
+        brakes = new Brakes(this);
+        landingGear = new LandingGear(this);
+        flaps = new Flaps(this);
+        radio = new Radio(this);
+        concentration = new Concentration(this);
     }
 
+    public Axis getAxis() {
+        return axis;
+    }
     public Engine getEngine(){
         return engine;
     }
+    public Brakes getBrakes() {
+        return brakes;
+    }
+    public LandingGear getLandingGear() {
+        return landingGear;
+    }
+    public Flaps getFlaps() { return flaps;}
+    public Radio getRadio() {return radio;}
+    public Concentration getConcentration() {return concentration;}
 
     //Getter and Setter for ApproachPosition
     public int getApproachPosition(){
@@ -111,6 +156,10 @@ class Airplane{
         this.approachPosition = approachPosition;
     }
 
-
-
+    public int getAltitude(){
+        return altitude;
+    }
+    public void setAltitude(int altitude){
+        this.altitude = altitude;
+    }
 }
