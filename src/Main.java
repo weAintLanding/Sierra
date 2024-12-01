@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String[] args) {
+
         System.out.println("Player Temporary Testing");
         CoPilot copilot = new CoPilot();
         Pilot pilot = new Pilot();
@@ -31,32 +32,32 @@ public class Main {
 
         Airplane airplane = new Airplane();
         System.out.println("Axis: " + airplane.getAxis().getAxisValue());
-        airplane.getAxis().changeAxis(4,2);
+        airplane.getAxis().changeAxis(4, 2);
         System.out.println("Axis: " + airplane.getAxis().getAxisValue());
         System.out.println();
 
         System.out.println("Position: " + airplane.getApproachPosition());
-        airplane.getEngine().movePlane(4,4);
+        airplane.getEngine().movePlane(4, 4);
         System.out.println("Position: " + airplane.getApproachPosition());
         System.out.println();
 
         System.out.println("Blue Aero Marker(Landing Gear): " + airplane.getEngine().getBlueAeroMarker());
         System.out.println("Landing Gears Activated: " + airplane.getLandingGear().getActivatedLandingGearFields());
         System.out.println("Position: " + airplane.getApproachPosition());
-        airplane.getEngine().movePlane(2,3);
+        airplane.getEngine().movePlane(2, 3);
         System.out.println("Position: " + airplane.getApproachPosition());
         airplane.getLandingGear().setLandingGearFieldsTrue(1);
         System.out.println("Blue Aero Marker(Landing Gear): " + airplane.getEngine().getBlueAeroMarker());
         System.out.println("Landing Gears Activated: " + airplane.getLandingGear().getActivatedLandingGearFields());
         System.out.println("Position: " + airplane.getApproachPosition());
-        airplane.getEngine().movePlane(2,3);
+        airplane.getEngine().movePlane(2, 3);
         System.out.println("Position: " + airplane.getApproachPosition());
         System.out.println();
 
         System.out.println("Orange Aero Marker(Flaps): " + airplane.getEngine().getOrangeAeroMarker());
         System.out.println("Flaps Activated: " + airplane.getFlaps().getActivatedFlapFields());
         System.out.println("Position: " + airplane.getApproachPosition());
-        airplane.getEngine().movePlane(5,4);
+        airplane.getEngine().movePlane(5, 4);
         System.out.println("Position: " + airplane.getApproachPosition());
         airplane.getFlaps().setFlapFieldsTrue(1);
         airplane.getFlaps().setFlapFieldsTrue(2);
@@ -64,7 +65,7 @@ public class Main {
         System.out.println("Orange Aero Marker(Flaps): " + airplane.getEngine().getOrangeAeroMarker());
         System.out.println("Flaps Activated: " + airplane.getFlaps().getActivatedFlapFields());
         System.out.println("Position: " + airplane.getApproachPosition());
-        airplane.getEngine().movePlane(5,4);
+        airplane.getEngine().movePlane(5, 4);
         System.out.println("Position: " + airplane.getApproachPosition());
         System.out.println();
 
@@ -93,3 +94,4 @@ public class Main {
         System.out.println("Altitude: " + airplane.getAltitude());
     }
 }
+
