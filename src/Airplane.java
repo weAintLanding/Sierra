@@ -1,12 +1,7 @@
 class Axis{
-    private final Airplane airplane;
     private int axisValue = 0;
 
-    public Axis(Airplane airplane){
-        this.airplane = airplane;
-    }
-
-    private void changeAxis(int pilotValue, int copilotValue){
+    public void changeAxis(int pilotValue, int copilotValue){
         int changeValue = copilotValue - pilotValue;
         axisValue = axisValue + changeValue;
 
@@ -22,8 +17,9 @@ class Axis{
 
 class Engine{
     private final Airplane airplane;
-    private int blueAeroMarker = 5;
-    private int orangeAeroMarker = 9;
+    private int blueAeroMarker = 4;
+    private int orangeAeroMarker = 8;
+    private int redBrakeMarker = 1;
 
     public Engine(Airplane airplane){
         this.airplane = airplane;
@@ -42,14 +38,20 @@ class Engine{
     public void setOrangeAeroMarker(int orangeAeroMarker){
         this.orangeAeroMarker = orangeAeroMarker;
     }
+    public int getRedBrakeMarker(){
+        return redBrakeMarker;
+    }
+    public void setRedBrakeMarker(int redBrakeMarker){
+        this.redBrakeMarker = redBrakeMarker;
+    }
 
-    private void movePlane(int pilotValue, int copilotValue){
+    public void movePlane(int pilotValue, int copilotValue){
         int engineSum = pilotValue+copilotValue;
 
-        if(engineSum < blueAeroMarker){
+        if(engineSum <= blueAeroMarker){
             System.out.println("Plane does not move");
         }
-        else if(engineSum < orangeAeroMarker){
+        else if(engineSum <= orangeAeroMarker){
             System.out.println("Plane moves 1 position.");
             airplane.setApproachPosition(airplane.getApproachPosition()+1);
         }
@@ -61,28 +63,35 @@ class Engine{
 }
 
 class Brakes{
-    private int redBrakeMarker = 2;
     private final Airplane airplane;
 
-    private boolean[] brakeFields = {false,false,false};
+    private final boolean[] brakeFields = {false,false,false};
     private int activatedBrakeFields = 0;
 
-    public Brakes(Airplane airplane) {
+    public Brakes(Airplane airplane){
         this.airplane = airplane;
     }
 
-    public int getRedBrakeMarker() {
-        return redBrakeMarker;
-    }
     public int getActivatedBrakeFields() {
         return activatedBrakeFields;
     }
 
     //Brake fields
     public void setBrakeFieldsTrue(int index) {
-        if(index>=0 && index<brakeFields.length && !brakeFields[index]){
-            brakeFields[index] = true;
-            activatedBrakeFields++;
+        for(int i=0; i<=index; i++){
+            if(i!=index && !brakeFields[i]){
+                System.out.println("Previous field(s) not true");
+                return;
+            }else if(i==index && !brakeFields[i]){
+                brakeFields[i] = true;
+                activatedBrakeFields++;
+                if(activatedBrakeFields == 1){
+                    airplane.getEngine().setRedBrakeMarker((airplane.getEngine().getRedBrakeMarker())+1);
+                }else if(activatedBrakeFields <= 3){
+                    airplane.getEngine().setRedBrakeMarker((airplane.getEngine().getRedBrakeMarker())+2);
+                }
+                return;
+            }
         }
     }
 }
@@ -90,22 +99,22 @@ class Brakes{
 class LandingGear{
     private final Airplane airplane;
 
-    private boolean[] landingGearFields = {false,false,false};
-    private int activatedLandingGearField = 0;
+    private final boolean[] landingGearFields = {false,false,false};
+    private int activatedLandingGearFields = 0;
 
     public LandingGear(Airplane airplane) {
         this.airplane = airplane;
     }
 
-    public int getActivatedLandingGearField() {
-        return activatedLandingGearField;
+    public int getActivatedLandingGearFields() {
+        return activatedLandingGearFields;
     }
 
     public void setLandingGearFieldsTrue(int index) {
         if(index>=0 && index<landingGearFields.length && !landingGearFields[index]){
             landingGearFields[index] = true;
-            activatedLandingGearField++;
-            airplane.getEngine().setBlueAeroMarker(airplane.getEngine().getBlueAeroMarker()+1);
+            activatedLandingGearFields++;
+            airplane.getEngine().setBlueAeroMarker((airplane.getEngine().getBlueAeroMarker())+1);
         }
     }
 }
@@ -113,49 +122,69 @@ class LandingGear{
 class Flaps{
     private final Airplane airplane;
 
+    private final boolean[] flapFields = {false,false,false,false};
+    private int activatedFlapFields = 0;
+
     public Flaps(Airplane airplane) {
         this.airplane = airplane;
     }
 
+    public int getActivatedFlapFields() {
+        return activatedFlapFields;
+    }
+
+    public void setFlapFieldsTrue(int index) {
+        for(int i=0; i<index+1; i++){
+            if(i!=index && !flapFields[i]){
+                System.out.println("Previous field(s) not true");
+                return;
+            }else if(i==index && !flapFields[i]){
+                flapFields[i] = true;
+                activatedFlapFields++;
+                airplane.getEngine().setOrangeAeroMarker((airplane.getEngine().getOrangeAeroMarker())+1);
+                return;
+            }
+        }
+    }
 
 }
 
 class Radio{
-    private final Airplane airplane;
+    private final int radioFields = 0;
 
-    public Radio(Airplane airplane) {
-        this.airplane = airplane;
+    public int getRadioFields() {
+        return radioFields;
     }
 }
 
 class Concentration{
-    private final Airplane airplane;
+    private final int coffeeAvailable = 0;
 
-    public Concentration(Airplane airplane) {
-        this.airplane = airplane;
+    public int getCoffeeAvailable(){
+        return coffeeAvailable;
     }
 }
 
 class Airplane{
-    private int altitude = 0;
+    private int altitude = 6000;
     private int approachPosition = 0;
 
-    private Axis axis;
-    private Engine engine;
-    private Brakes brakes;
-    private LandingGear landingGear;
-    private Flaps flaps;
-    private Radio radio;
-    private Concentration concentration;
+    private final Axis axis;
+    private final Engine engine;
+    private final Brakes brakes;
+    private final LandingGear landingGear;
+    private final Flaps flaps;
+    private final Radio radio;
+    private final Concentration concentration;
 
     public Airplane(){
         engine = new Engine(this);
-        axis = new Axis(this);
+        axis = new Axis();
         brakes = new Brakes(this);
         landingGear = new LandingGear(this);
         flaps = new Flaps(this);
-        radio = new Radio(this);
-        concentration = new Concentration(this);
+        radio = new Radio();
+        concentration = new Concentration();
     }
 
     public Axis getAxis() {
@@ -191,7 +220,9 @@ class Airplane{
     public int getAltitude(){
         return altitude;
     }
-    public void setAltitude(int altitude){
-        this.altitude = altitude;
+    public void setAltitude(){
+        if(altitude>0 && altitude<=6000){
+            this.altitude = altitude-1000;
+        }
     }
 }
