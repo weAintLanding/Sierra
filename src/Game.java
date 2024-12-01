@@ -43,6 +43,11 @@ class Game {
             System.out.println("Crash: Altitude below safe levels");
             return true;
         }
+        int currentPosition = airplane.getApproachPosition();
+        if (approachTrack.hasAirplanesAt(currentPosition)) {
+            System.out.println("Crash: Collision detected at position " + currentPosition + ".");
+            return true;
+        }
         return false;
     }
     public void switchPlayer() {
