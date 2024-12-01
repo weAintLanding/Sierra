@@ -64,6 +64,8 @@ class Brakes{
     private int redBrakeMarker = 2;
     private final Airplane airplane;
 
+    private boolean[] brakeFields = {false,false,false};
+
     public Brakes(Airplane airplane) {
         this.airplane = airplane;
     }
@@ -74,6 +76,15 @@ class Brakes{
     }
     public void setRedBrakeMarker(int redBrakeMarker) {
         this.redBrakeMarker = redBrakeMarker;
+    }
+
+    //Brake fields
+    public boolean getBrakeFields(int index) {
+        return brakeFields[index];
+    }
+    public void setBrakeFieldsTrue(int index) {
+        brakeFields[index] = true;
+
     }
 }
 
@@ -91,6 +102,8 @@ class Flaps{
     public Flaps(Airplane airplane) {
         this.airplane = airplane;
     }
+
+
 }
 
 class Radio{
@@ -108,7 +121,6 @@ class Concentration{
         this.airplane = airplane;
     }
 }
-
 
 class Airplane{
     private int altitude = 0;
