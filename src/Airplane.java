@@ -71,35 +71,42 @@ class Brakes{
         this.airplane = airplane;
     }
 
-    //Getter and Setter for brakeMarker
     public int getRedBrakeMarker() {
         return redBrakeMarker;
     }
+    public int getActivatedBrakeFields() {
+        return activatedBrakeFields;
+    }
 
     //Brake fields
-    public boolean getBrakeFields(int index) {
-        return brakeFields[index];
-    }
     public void setBrakeFieldsTrue(int index) {
         if(index>=0 && index<brakeFields.length && !brakeFields[index]){
             brakeFields[index] = true;
             activatedBrakeFields++;
-
-            if(activatedBrakeFields == 1){
-                redBrakeMarker++;
-            }else if(activatedBrakeFields <= 3){
-                redBrakeMarker += 2;
-            }
         }
-
     }
 }
 
 class LandingGear{
     private final Airplane airplane;
 
+    private boolean[] landingGearFields = {false,false,false};
+    private int activatedLandingGearField = 0;
+
     public LandingGear(Airplane airplane) {
         this.airplane = airplane;
+    }
+
+    public int getActivatedLandingGearField() {
+        return activatedLandingGearField;
+    }
+
+    public void setLandingGearFieldsTrue(int index) {
+        if(index>=0 && index<landingGearFields.length && !landingGearFields[index]){
+            landingGearFields[index] = true;
+            activatedLandingGearField++;
+            airplane.getEngine().setBlueAeroMarker(airplane.getEngine().getBlueAeroMarker()+1);
+        }
     }
 }
 
