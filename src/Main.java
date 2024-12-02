@@ -1,3 +1,4 @@
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Player Temporary Testing");
@@ -6,7 +7,9 @@ public class Main {
         //Dice roll test
         pilot.rollDice();
         copilot.rollDice();
-        //Coffee test
+        pilot.getDiceRolls();
+        copilot.getDiceRolls();
+        /*//Coffee test
         pilot.setCoffee(2);
         // pilot.useCoffee(5,1);
         pilot.getCoffee();
@@ -90,6 +93,7 @@ public class Main {
 
         System.out.println("Altitude: " + airplane.getAltitude());
         airplane.setAltitude();
-        System.out.println("Altitude: " + airplane.getAltitude());
+        System.out.println("Altitude: " + airplane.getAltitude());*/
     }
 }
+

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Players {
-    private ArrayList<Integer> diceRolls = new ArrayList<Integer>();
+    private ArrayList<Dice> diceRolls = new ArrayList<Dice>();
     private Integer axisSlot = null;
     private Integer throttle = null;
     private int radioSlots;
@@ -13,18 +13,16 @@ public class Players {
     Random random = new Random();
 
     public void rollDice () {
-//        for (int i = 0; i < 4; i++){
-//            diceRolls.add(random.nextInt(6)+1);
-//         }
-        diceRolls.add(5);
-        diceRolls.add(3);
-        diceRolls.add(2);
-        diceRolls.add(1);
-        diceRolls.add(6);
-        diceRolls.add(4);
+        for(int i=0; i<4; i++){
+            diceRolls.add(new Dice());
+        }
     }
     public void getDiceRolls () {
-        System.out.println("Current dice: " + diceRolls);
+        ArrayList<Integer> diceArray = new ArrayList<>();
+        for(int i=0; i<diceRolls.size(); i++){
+            diceArray.add(diceRolls.get(i).getDiceValue());
+        }
+        System.out.println(diceArray);
     }
 
     public void setAxis(int diceValue){
@@ -85,7 +83,7 @@ public class Players {
             System.out.println("No more dice can be placed");
         }
     }
-    public void useCoffee (int diceValue, int coffeeValue){
+/*    public void useCoffee (int diceValue, int coffeeValue){
         int coffeeNeeded = Math.abs(coffeeValue);
         if (coffeeValue != 0 && coffee >= coffeeNeeded && diceRolls.contains(diceValue)){
             int index = diceRolls.indexOf(diceValue);
@@ -95,15 +93,15 @@ public class Players {
                 coffee -= coffeeNeeded;
             } else System.out.println("Invalid number: Out of bounds");
         }else System.out.println("Not valid");
-    }
+    }*/
     public void getCoffee() {
         System.out.println("Total no. of Coffees: " + coffee);
     }
 
-    public void reroll(){
+/*    public void reroll(){
         for(int i = 0; i < diceRolls.size(); i++){
             diceRolls.set(i, (random.nextInt(6)+1));
         }
-    }
+    }*/
 }
 
