@@ -15,8 +15,8 @@ public class Main {
         pilot.setThrottle(6);
         pilot.getThrottle();
         //Axis test
-        pilot.setAxis(3);
-        pilot.getAxis();
+        pilot.setAxis(4);
+        copilot.setAxis(2);
         //Radio test
         copilot.setRadio(3);
         copilot.getRadio();
@@ -31,7 +31,7 @@ public class Main {
 
         Airplane airplane = new Airplane();
         System.out.println("Axis: " + airplane.getAxis().getAxisValue());
-        airplane.getAxis().changeAxis(4,2);
+        airplane.getAxis().changeAxis(pilot,copilot);
         System.out.println("Axis: " + airplane.getAxis().getAxisValue());
         System.out.println();
 

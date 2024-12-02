@@ -20,6 +20,8 @@ class Players {
         diceRolls.add(3);
         diceRolls.add(2);
         diceRolls.add(1);
+        diceRolls.add(6);
+        diceRolls.add(4);
     }
     public void getDiceRolls () {
         System.out.println("Current dice: " + diceRolls);
@@ -36,9 +38,8 @@ class Players {
             }else System.out.println("No such dice exists for the player");
         }
     }
-    public void getAxis() {
-        if (axisSlot != null) System.out.println("Axis for " + this.getClass().getSimpleName() + " is: " + axisSlot);
-        else System.out.println("Axis for " + this.getClass().getSimpleName() + " is: empty");
+    public Integer getAxis() {
+        return axisSlot;
     }
 
     public void setThrottle(int diceValue){

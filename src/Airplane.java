@@ -1,13 +1,11 @@
 class Axis{
     private int axisValue = 0;
 
-    public void changeAxis(int pilotValue, int copilotValue){
+    public void changeAxis(Players pilot, Players copilot){
+        Integer pilotValue = pilot.getAxis();
+        Integer copilotValue = copilot.getAxis();
         int changeValue = copilotValue - pilotValue;
         axisValue = axisValue + changeValue;
-
-        if(axisValue < -2 || axisValue > 2){
-            System.out.println("Plane has crashed.");
-        }
     }
 
     public int getAxisValue() {
