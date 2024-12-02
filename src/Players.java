@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-class Players {
+public class Players {
     private ArrayList<Integer> diceRolls = new ArrayList<Integer>();
     private Integer axisSlot = null;
     private Integer throttle = null;
@@ -104,23 +104,6 @@ class Players {
         for(int i = 0; i < diceRolls.size(); i++){
             diceRolls.set(i, (random.nextInt(6)+1));
         }
-    }
-}
-
-class Pilot extends Players {
-    @Override
-    public void setRadio (int diceValue){
-        if (getRadioSlots() < 1){
-            super.setRadio(diceValue);
-        }else System.out.println(this.getClass().getSimpleName() + " cannot place more dice in the Radio slot");
-    }
-}
-class CoPilot extends Players {
-    @Override
-    public void setRadio (int diceValue){
-        if (getRadioSlots() < 2){
-            super.setRadio(diceValue);
-        }else System.out.println(this.getClass().getSimpleName() + " cannot place more dice in the Radio slot");
     }
 }
 
