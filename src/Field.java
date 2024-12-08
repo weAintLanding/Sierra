@@ -4,7 +4,11 @@ public class Field {
     private int diceValue;
     private boolean occupied;
 
+<<<<<<< HEAD
     public Field(){
+=======
+    public Field(String fieldType, String owner){
+>>>>>>> 81fe30a93d9b67fb431f7337480531be3ca5acea
         this.fieldType = fieldType;
         this.owner = owner;
         this.occupied = false;
