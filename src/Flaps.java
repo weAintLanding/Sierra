@@ -50,9 +50,12 @@ public class Flaps {
     public void displayFlapFields() {
         System.out.println("Flap Fields Status:");
         for (int i = 0; i < flapFields.length; i++) {
-            String status = flapFields[i].isOccupied()
-                    ? "Activated (Dice: " + flapFields[i].getDiceValue() + ")"
-                    : "Not Activated";
+            String status;
+            if (flapFields[i].isOccupied()) {
+                status = "Activated (Dice: " + flapFields[i].getDiceValue() + ")";
+            } else {
+                status = "Not Activated";
+            }
             System.out.println("Field " + (i + 1) + ": " + status);
         }
     }
