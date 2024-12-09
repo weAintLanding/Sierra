@@ -8,6 +8,7 @@ public class Game {
     private ApproachTrack approachTrack;
     private Players currentPlayer;
     private final int maxRounds = 5;
+    private AltitudeTrack altitudeTrack;
 
     public Game() {
         this.airplane = new Airplane();
