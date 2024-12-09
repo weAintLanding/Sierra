@@ -4,19 +4,22 @@ public class Field {
     private int diceValue;
     private boolean occupied;
 
-<<<<<<< HEAD
-    public Field(){
-=======
-    public Field(String fieldType, String owner){
->>>>>>> 81fe30a93d9b67fb431f7337480531be3ca5acea
+    public Field() {
+        this.fieldType = "undefined";
+        this.owner = "none";
+        this.occupied = false;
+        this.diceValue = -1;
+    }
+
+    public Field(String fieldType, String owner) {
         this.fieldType = fieldType;
         this.owner = owner;
         this.occupied = false;
         this.diceValue = -1;
     }
 
-    public boolean placeDice(int diceValue){
-        if(occupied){
+    public boolean placeDice(int diceValue) {
+        if (occupied) {
             System.out.println("Field is already occupied. Cannot place another die.");
             return false;
         }
@@ -25,13 +28,14 @@ public class Field {
         System.out.println("Dice value " + diceValue + " placed on " + fieldType + " field.");
         return true;
     }
-    public void resetField(){
+
+    public void resetField() {
         this.diceValue = -1;
         this.occupied = false;
         System.out.println(fieldType + " field has been reset.");
     }
 
-    public boolean isOccupied(){
+    public boolean isOccupied() {
         return occupied;
     }
 
@@ -45,6 +49,7 @@ public class Field {
             System.out.println("No dice placed yet.");
         }
     }
+
     public String getFieldType() {
         return fieldType;
     }
@@ -57,5 +62,3 @@ public class Field {
         return diceValue;
     }
 }
-
-
