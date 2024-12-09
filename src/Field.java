@@ -1,17 +1,16 @@
 public class Field {
     private String fieldType;
-    private String owner;
+    private Players owner;
     private int diceValue;
     private boolean occupied;
 
     public Field() {
         this.fieldType = "undefined";
-        this.owner = "none";
         this.occupied = false;
         this.diceValue = -1;
     }
 
-    public Field(String fieldType, String owner) {
+    public Field(String fieldType, Players owner) {
         this.fieldType = fieldType;
         this.owner = owner;
         this.occupied = false;
@@ -54,7 +53,7 @@ public class Field {
         return fieldType;
     }
 
-    public String getOwner() {
+    public Players getOwner() {
         return owner;
     }
 
