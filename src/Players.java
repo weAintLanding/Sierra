@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.List;
 
 public class Players {
-    private List<Dice> diceRolls = new ArrayList<Dice>();
+    private List<Dice> diceRolls;
     private Integer axisSlot = null;
     private Integer throttle = null;
     private int radioSlots;
@@ -13,17 +13,23 @@ public class Players {
     private static final int maxCoffee = 3;
     Random random = new Random();
 
+
+    public Players() {
+        diceRolls = new ArrayList<>();
+        rollDice();
+    }
+
     public void rollDice () {
         for(int i = 0; i < 4; i++){
             diceRolls.add(new Dice());
         }
     }
-    public void getDiceRolls () {
+    public String getDiceRolls () {
         List<Integer> diceArray = new ArrayList<>();
         for(int i = 0; i < diceRolls.size(); i++){
             diceArray.add(diceRolls.get(i).getDiceValue());
         }
-        System.out.println(diceArray);
+        return diceArray.toString();
     }
 
     public boolean isDiceThere (int diceValue){
@@ -41,6 +47,15 @@ public class Players {
             }
         }
     }
+
+    public void reroll() {
+        for (int i = 0; i < diceRolls.size(); i++) {
+            Dice dice = diceRolls.get(i);
+            int newValue = random.nextInt(6)+1;
+            dice.setDiceValue(newValue);
+        }
+    }
+
     public void setAxis(int diceValue){
         if (axisSlot != null) {
             System.out.println("Axis slot is already occupied");
@@ -129,13 +144,5 @@ public class Players {
     public void getCoffee() {
         System.out.println("Total no. of Coffees: " + coffee);
     }
-
-   public void reroll() {
-       for (int i = 0; i < diceRolls.size(); i++) {
-           Dice dice = diceRolls.get(i);
-           int newValue = random.nextInt(6)+1;
-           dice.setDiceValue(newValue);
-       }
-   }
 }
 

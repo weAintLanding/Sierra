@@ -5,8 +5,7 @@ public class Dice {
     Random random = new Random();
 
     public Dice() {
-        //this.diceValue = random.nextInt(6)+1;
-        this.diceValue = 4;
+        this.diceValue = random.nextInt(6)+1;
     }
 
     public int getDiceValue() {

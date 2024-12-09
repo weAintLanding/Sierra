@@ -20,6 +20,15 @@ public class Game {
         this.approachTrack = new ApproachTrack();
     }
 
+    public Pilot getPilot() {
+        return pilot;
+    }
+    public CoPilot getCoPilot() {
+        return copilot;
+    }
+    public Airplane getAirplane() {
+        return airplane;
+    }
 
     public boolean checkWin() {
         if (airplane.getApproachPosition() == 6 // Final position in the approach track
