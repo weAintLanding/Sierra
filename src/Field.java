@@ -1,21 +1,24 @@
 public class Field {
-    private String fieldType;
+    private final String fieldType;
     private Players owner;
     private int diceValue;
     private boolean occupied;
+    private boolean switchLight;
 
-    public Field() {
-        this.fieldType = "undefined";
+    public Field(String fieldType) {
+        this.fieldType = fieldType;
         this.occupied = false;
         this.diceValue = -1;
+        this.switchLight = false;
     }
 
-    public Field(String fieldType, Players owner) {
+    /*public Field(String fieldType, Players owner) {
         this.fieldType = fieldType;
         this.owner = owner;
         this.occupied = false;
         this.diceValue = -1;
-    }
+        this.switchLight = false;
+    }*/
 
     public boolean placeDice(int diceValue) {
         if (occupied) {
@@ -47,6 +50,18 @@ public class Field {
         } else {
             System.out.println("No dice placed yet.");
         }
+        if (switchLight) {
+            System.out.println("Turned On.");
+        }else{
+            System.out.println("Not Turned On.");
+        }
+    }
+    public boolean isSwitchedOn(){
+        return switchLight;
+    }
+
+    public void setSwitchOn(){
+        this.switchLight = true;
     }
 
     public String getFieldType() {
