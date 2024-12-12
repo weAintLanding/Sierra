@@ -2,22 +2,30 @@ public class Airplane{
     private int altitude = 6000;
     private int approachPosition = 0;
 
+    private Game game;
     private final Axis axis;
     private final Engine engine;
     private final Brakes brakes;
     private final LandingGear landingGear;
     private final Flaps flaps;
-    private final Radio radio;
+    //private final Radio radio;
     private final Concentration concentration;
 
     public Airplane(){
         engine = new Engine(this);
-        axis = new Axis();
+        axis = new Axis(this);
         brakes = new Brakes(this);
         landingGear = new LandingGear(this);
         flaps = new Flaps(this);
-        radio = new Radio();
+        //radio = new Radio(this);
         concentration = new Concentration();
+    }
+
+    public void setGame(Game game){
+        this.game = game;
+    }
+    public Game getGame(){
+        return game;
     }
 
     public Axis getAxis() {
@@ -35,9 +43,9 @@ public class Airplane{
     public Flaps getFlaps(){
         return flaps;
     }
-    public Radio getRadio(){
+    /*public Radio getRadio(){
         return radio;
-    }
+    }*/
     public Concentration getConcentration() {
         return concentration;
     }
@@ -52,10 +60,5 @@ public class Airplane{
 
     public int getAltitude(){
         return altitude;
-    }
-    public void setAltitude(){
-        if(altitude>0 && altitude<=6000){
-            this.altitude = altitude-1000;
-        }
     }
 }
