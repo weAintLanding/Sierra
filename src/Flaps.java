@@ -12,7 +12,7 @@ public class Flaps {
     public Flaps(Airplane airplane) {
         this.airplane = airplane;
         for (int i = 0; i < flapConstraints.length; i++) {
-            flapFields[i] = new Field();
+            flapFields[i] = new Field("Flaps");
         }
     }
 
@@ -21,11 +21,11 @@ public class Flaps {
     }
 
     public boolean setFlapFieldsTrue(int index, int diceValue) {
-        if (index < 0 || index >= flapFields.length) {
+        /*if (index < 0 || index >= flapFields.length) {
             System.out.println("Invalid flap field index.");
             return false;
-        }
-        if (index > 0 && !flapFields[index - 1].isOccupied()) {
+        }*/
+        if (index > 0 && !flapFields[index - 1].isSwitchedOn()) {
             System.out.println("Previous flap field not activated yet.");
             return false;
         }
@@ -33,13 +33,14 @@ public class Flaps {
             System.out.println("Invalid dice value. Expected: " + flapConstraints[index][0] + " or " + flapConstraints[index][1]);
             return false;
         }
-        if (flapFields[index].placeDice(diceValue)) {
+        if (flapFields[index].placeDice(diceValue) && !flapFields[index].isSwitchedOn()) {
             activatedFlapFields++;
+            flapFields[index].setSwitchOn();
             System.out.println("Flap field " + (index + 1) + " activated successfully.");
             airplane.getEngine().setOrangeAeroMarker(airplane.getEngine().getOrangeAeroMarker() + 1);
             return true;
         }
-        System.out.println("Flap field already occupied.");
+        System.out.println("Flap field already activated.");
         return false;
     }
 
@@ -51,12 +52,18 @@ public class Flaps {
         System.out.println("Flap Fields Status:");
         for (int i = 0; i < flapFields.length; i++) {
             String status;
-            if (flapFields[i].isOccupied()) {
-                status = "Activated (Dice: " + flapFields[i].getDiceValue() + ")";
+            if (flapFields[i].isSwitchedOn()) {
+                status = "Activated.";
             } else {
-                status = "Not Activated";
+                status = "Not Activated.";
             }
-            System.out.println("Field " + (i + 1) + ": " + status);
+            System.out.println("Field " + (i+1) + ". (" + flapConstraints[i][0] + "|" + flapConstraints[i][1] + "): " + status);
+        }
+    }
+
+    public void clearField(){
+        for (Field flapField : flapFields) {
+            flapField.resetField();
         }
     }
 }

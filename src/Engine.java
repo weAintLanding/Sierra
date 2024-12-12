@@ -39,9 +39,17 @@ public class Engine {
         if (engineSum <= blueAeroMarker) {
             System.out.println("Plane does not move");
         } else if (engineSum <= orangeAeroMarker) {
+            if(airplane.getGame().checkCrashMove(1)){
+                System.out.println("Plane crashed. ");
+                System.exit(0);
+            }
             System.out.println("Plane moves 1 position.");
             airplane.setApproachPosition(airplane.getApproachPosition() + 1);
         } else {
+            if(airplane.getGame().checkCrashMove(2)){
+                System.out.println("Plane crashed. ");
+                System.exit(0);
+            }
             System.out.println("Plane moves 2 positions.");
             airplane.setApproachPosition(airplane.getApproachPosition() + 2);
         }

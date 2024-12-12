@@ -1,7 +1,9 @@
 public class Radio {
-    private final int radioFields = 0;
+    private final Airplane airplane;
 
-    public int getRadioFields() {
-        return radioFields;
+    public Radio(Airplane airplane) {
+        this.airplane = airplane;
     }
+
+
 }
