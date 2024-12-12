@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ApproachTrack {
     private final int length = 7; // Total length of the approach track
@@ -6,15 +7,8 @@ public class ApproachTrack {
 
     // Constructor: Initialize the track with predefined airplane counts
     public ApproachTrack() {
-        this.track = new ArrayList<>();
+        this.track = new ArrayList<>(Arrays.asList(0,1,1,2,1,3,2));
         // Populate the track: (0, 0), (1, 0), (2, 1), (3, 2), (4, 1), (5, 3), (6, 2)
-        track.add(0); // Index 0
-        track.add(0); // Index 1
-        track.add(1); // Index 2
-        track.add(2); // Index 3
-        track.add(1); // Index 4
-        track.add(3); // Index 5
-        track.add(2); // Index 6
     }
 
     public int getLength() {
@@ -22,12 +16,12 @@ public class ApproachTrack {
     }
 
     // Getter for the airplane count at a specific position
-    public int getAirplanesAt(int position) {
-        if (position >= 0 && position < length) {
-            return track.get(position);
+    public int getAirplanesAt(int index) {
+        if (index >= 0 && index < length) {
+            return track.get(index);
         }
-        System.out.println("Position out of bounds: " + position);
-        return 0;
+        //System.out.println("Position out of bounds: " + index);
+        return -1;
     }
 
     // Remove an airplane from a specific position
