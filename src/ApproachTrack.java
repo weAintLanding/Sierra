@@ -7,7 +7,7 @@ public class ApproachTrack {
 
     // Constructor: Initialize the track with predefined airplane counts
     public ApproachTrack() {
-        this.track = new ArrayList<>(Arrays.asList(0,1,1,2,1,3,2));
+        this.track = new ArrayList<>(Arrays.asList(0,0,1,2,1,3,2));
         // Populate the track: (0, 0), (1, 0), (2, 1), (3, 2), (4, 1), (5, 3), (6, 2)
     }
 
