@@ -3,20 +3,27 @@ import java.util.Random;
 import java.util.List;
 
 public class Players {
-    private List<Dice> diceRolls;
+    private final Game game;
+    private final List<Dice> diceRolls;
     private Integer axisSlot = null;
     private Integer throttle = null;
-    private int radioSlots;
-    private Integer radio = null;
-    private static final int maxRadioSlots = 2;
-    private static int coffee = 0;
-    private static final int maxCoffee = 3;
+    //private int radioSlots;
+    //private Integer radio = null;
+    //private static final int maxRadioSlots = 2;
+    protected int radioSlots;
+    protected Field[] radioPlayer;
+/*    private static int coffee = 0;
+    private static final int maxCoffee = 3;*/
     Random random = new Random();
 
 
-    public Players() {
+    public Players(Game game) {
+        this.game = game;
         diceRolls = new ArrayList<>();
-        rollDice();
+    }
+
+    public Airplane getAirplane(){
+        return game.getAirplane();
     }
 
     public void rollDice () {
@@ -31,14 +38,20 @@ public class Players {
         }
         return diceArray.toString();
     }
-
     public boolean isDiceThere (int diceValue){
         for(Dice dice : diceRolls){
             if(dice.getDiceValue() == diceValue) return true;
         }
         return false;
     }
-
+    public Dice getDice (int diceValue){
+        for(Dice dice : diceRolls){
+            if(dice.getDiceValue() == diceValue){
+                return dice;
+            }
+        }
+        return null;
+    }
     public void removeDice (int diceValue){
         for (Dice dice : diceRolls){
             if (dice.getDiceValue() == diceValue){
@@ -47,45 +60,57 @@ public class Players {
             }
         }
     }
-
     public void reroll() {
-        for (int i = 0; i < diceRolls.size(); i++) {
-            Dice dice = diceRolls.get(i);
-            int newValue = random.nextInt(6)+1;
-            dice.setDiceValue(newValue);
+        if (game.getRerollsAvailable() > 0){
+            for (int i = 0; i < diceRolls.size(); i++) {
+                Dice dice = diceRolls.get(i);
+                int newValue = random.nextInt(6)+1;
+                dice.setDiceValue(newValue);
+            }
+            game.decreaseRerollsAvailable();
+            System.out.println("Dice Rerolled. Remaining rerolls: " + game.getRerollsAvailable());
+        } else {
+            System.out.println("No rerolls available.");
         }
     }
 
-    public void setAxis(int diceValue){
+    public boolean setAxis(Dice dice){
+        int diceValue = dice.getDiceValue();
         if (axisSlot != null) {
             System.out.println("Axis slot is already occupied");
+            return false;
         }
-        if (isDiceThere(diceValue)) {
-            this.throttle = diceValue;
-            removeDice(diceValue);
-            System.out.println(this.getClass().getSimpleName() + " placed " + diceValue + " on their Axis slot");
-        }else System.out.println("No such dice exists for the player");
+        this.axisSlot = diceValue;
+        removeDice(diceValue);
+        System.out.println(this.getClass().getSimpleName() + " placed " + diceValue + " on their Axis slot");
+        return true;
     }
     public Integer getAxis() {
         return axisSlot;
     }
+    public boolean isAxis(){
+        return axisSlot != null;
+    }
 
-    public void setThrottle(int diceValue){
+    public boolean setThrottle(Dice dice){
+        int diceValue = dice.getDiceValue();
         if (throttle != null) {
-            System.out.println("Throttle slot is already occupied");
+            System.out.println("Throttle slot is already occupied.");
+            return false;
         }
-        if (isDiceThere(diceValue)) {
-                this.throttle = diceValue;
-                removeDice(diceValue);
-                System.out.println(this.getClass().getSimpleName() + " placed " + diceValue + " on their Throttle slot");
-        }else System.out.println("No such dice exists for the player");
+        this.throttle = diceValue;
+        removeDice(diceValue);
+        System.out.println(this.getClass().getSimpleName() + " placed " + diceValue + " on their Throttle slot.");
+        return true;
     }
-    public void getThrottle() {
-        if (throttle != null) System.out.println("Throttle for " + this.getClass().getSimpleName() + " : " + throttle);
-        else System.out.println("Throttle for " + this.getClass().getSimpleName() + " is: empty");
+    public Integer getThrottle() {
+        return throttle;
+    }
+    public boolean isThrottle(){
+        return throttle != null;
     }
 
-    public void setRadio (int diceValue){
+    /*public void setRadio (int diceValue){
         if (radioSlots < maxRadioSlots){
             if (isDiceThere(diceValue)){
                 radioSlots++;
@@ -101,18 +126,33 @@ public class Players {
     public void getRadio() {
         if (radio != null) System.out.println("Radio for " + this.getClass().getSimpleName() + " is: " + radio);
         else System.out.println("Radio for " + this.getClass().getSimpleName() + " is: empty");
+    }*/
+
+    public boolean setRadio(Dice dice){
+        int diceValue = dice.getDiceValue();
+        for(Field field: radioPlayer){
+            if(!field.isOccupied()){
+                field.placeDice(diceValue);
+                removeDice(diceValue);
+                game.getApproachTrack().removeAirplaneWithRadio(this.getAirplane().getApproachPosition(), diceValue);
+                return true;
+            }
+        }
+        System.out.println("No more radios available.");
+        return false;
+    }
+    public void clearRadio(){
+        for(Field field: radioPlayer){
+            field.resetField();
+        }
     }
 
-    public void setCoffee (int diceValue){
-        if (coffee < maxCoffee){
-            if(isDiceThere(diceValue)){
-                coffee++;
-                removeDice(diceValue);
-                System.out.println(this.getClass().getSimpleName() + " placed " + diceValue + " in Concentration");
-            }else System.out.println("No such dice exists for the player");
-        }else System.out.println("No more dice can be placed");
+    public boolean setCoffee (Dice dice){
+        boolean coffeeAdded = this.getAirplane().getConcentration().addCoffee();
+        this.removeDice(dice.getDiceValue());
+        return coffeeAdded;
     }
-    public void useCoffee (int diceValue, int coffeeValue){
+/*    public void useCoffee (int diceValue, int coffeeValue){
         int coffeeNeeded = Math.abs(coffeeValue);
         if (coffeeValue == 0) {
             System.out.println("Invalid: Coffee can not be 0");
@@ -143,6 +183,11 @@ public class Players {
     }
     public void getCoffee() {
         System.out.println("Total no. of Coffees: " + coffee);
+    }*/
+
+    public void clearSlots(){
+        this.axisSlot = null;
+        this.throttle = null;
     }
 }
 
