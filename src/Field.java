@@ -34,7 +34,7 @@ public class Field {
     public void resetField() {
         this.diceValue = -1;
         this.occupied = false;
-        System.out.println(fieldType + " field has been reset.");
+        //System.out.println(fieldType + " field has been reset.");
     }
 
     public boolean isOccupied() {
